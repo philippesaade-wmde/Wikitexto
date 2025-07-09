@@ -116,7 +116,13 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       if (apiKey) {
-        document.getElementById("apiKeyModal").style.display = "none";
+        // Hide modal
+        const modal = document.getElementById("apiKeyModal");
+        modal.style.display = "none";
+        modal.classList.remove("d-block"); // remove Bootstrap override
+        modal.classList.add("d-none");
+
+        // Start the game
         getRandomItem();
       }
     });
