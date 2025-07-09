@@ -228,7 +228,7 @@
 
     function getColor(score) {
       if (score <= 0.33) return "rgb(255, 0, 0, 0.5)";
-      const ratio = Math.min((score - 0.33) / 0.33, 1);
+      const ratio = Math.min((score - 0.5) / 0.5, 1);
       const red = Math.round(255 * (1 - ratio));
       const green = Math.round(255 * ratio);
       return `rgb(${red}, ${green}, 0, 0.5)`;
