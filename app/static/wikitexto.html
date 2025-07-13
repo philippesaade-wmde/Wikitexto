@@ -230,7 +230,10 @@
       if (!response.ok) {
         if (response.status === 401) {
           localStorage.removeItem("wikivector_api_key");
-          document.getElementById("apiKeyModal").style.display = "block";
+          const modal = document.getElementById("apiKeyModal");
+          modal.style.display = "block";
+          modal.classList.add("d-block");
+          modal.classList.remove("d-none");
         }
         throw new Error("Similarity API failed with status " + response.status);
       }
