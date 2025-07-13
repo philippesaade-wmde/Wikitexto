@@ -227,7 +227,13 @@
       const response = await fetch(`https://wd-vectordb.toolforge.org/similarity-score?${params.toString()}`, {
         headers: { 'x-api-secret': apiKey }
       });
-      if (!response.ok) throw new Error("Similarity API failed with status " + response.status);
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem("wikivector_api_key");
+          document.getElementById("apiKeyModal").style.display = "block";
+        }
+        throw new Error("Similarity API failed with status " + response.status);
+      }
       const json = await response.json();
       return json[0].similarity_score;
     }
@@ -281,6 +287,7 @@
         score = await getSimilarityScoreQuery(text, targetQID);
       } catch (err) {
         alert("No internet connection or invalid request. Try again later.");
+        localStorage.clear();
         return;
       }
 
